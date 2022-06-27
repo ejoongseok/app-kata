@@ -30,7 +30,7 @@ class AccountApiTest {
 	@Autowired ObjectMapper objectMapper;
 
 	@Test
-	@DisplayName("유효하지 않은 이메일 주소를 입력하면 Bad Request 응답. [유효하지 않은 이메일]")
+	@DisplayName("유효하지 않은 이메일 주소를 입력하면 Bad Request 응답.")
 	void should_invalid_email_join_account_return_bad_request() throws Exception {
 		// given
 		String username = "joongseok";
