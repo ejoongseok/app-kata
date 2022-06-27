@@ -45,6 +45,9 @@ class AccountApiTest {
 
 		badRequestAssertions("이메일을 입력해주세요.",
 			joinAccountRequest(new CreateAccountRequest(username, "")));
+
+		badRequestAssertions("이름을 입력해주세요.",
+			joinAccountRequest(new CreateAccountRequest("", "joongseok@gmail.com")));
 	}
 
 	private MockHttpServletResponse joinAccountRequest(CreateAccountRequest request) throws Exception {
