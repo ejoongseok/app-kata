@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import com.example.appkata.account.domain.Account;
 import com.example.appkata.account.domain.AccountRepository;
 import com.example.appkata.account.infra.CreatedAccountEmailSendEvent;
+import com.example.appkata.login.application.LoginService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -16,10 +17,15 @@ public class AccountService {
 
 	private final ApplicationEventPublisher publisher;
 
+
 	public Account join(CreateAccountRequest request) {
 		Account account = new Account(request.getUsername(), request.getEmail());
 		repository.save(account);
 		publisher.publishEvent(new CreatedAccountEmailSendEvent(account.getEmail(), account.getUsername()));
 		return account;
+	}
+
+	public Account updateUsername(UpdateAccountRequest request) {
+		return null;
 	}
 }
