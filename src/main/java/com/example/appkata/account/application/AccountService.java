@@ -1,9 +1,14 @@
 package com.example.appkata.account.application;
 
 import com.example.appkata.account.domain.Account;
+import com.example.appkata.account.domain.AccountRepository;
 
 public class AccountService {
+	private AccountRepository repository;
+
 	public Account join(CreateAccountRequest request) {
-		return new Account(request.getUsername(), request.getEmail());
+		Account account = new Account(request.getUsername(), request.getEmail());
+		repository.save(account);
+		return account;
 	}
 }
