@@ -19,6 +19,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.example.appkata.account.application.CreateAccountRequest;
 import com.example.appkata.account.application.CreateAccountResponse;
+import com.example.appkata.account.application.UpdateAccountResponse;
 import com.example.appkata.account.infra.EmailSender;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -73,11 +74,4 @@ class AccountApiIntegrationTest {
 		Assertions.assertThat(updateAccountResponse.getName()).isEqualTo(expectedUsername);
 	}
 
-	private static class UpdateAccountResponse {
-		private String name;
-
-		public String getName() {
-			return name;
-		}
-	}
 }
