@@ -19,6 +19,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.example.appkata.account.application.CreateAccountRequest;
 import com.example.appkata.account.application.CreateAccountResponse;
+import com.example.appkata.account.application.UpdateAccountRequest;
 import com.example.appkata.account.application.UpdateAccountResponse;
 import com.example.appkata.account.infra.EmailSender;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -64,8 +65,12 @@ class AccountApiIntegrationTest {
 	void 회원_수정_요청() throws Exception {
 		// given
 		String expectedUsername = "joongSeok";
+		UpdateAccountRequest request = new UpdateAccountRequest(expectedUsername);
 		// when
-		MockHttpServletResponse response = null;
+		MockHttpServletResponse response = mockMvc.perform(patch("/accounts")
+			.contentType(MediaType.APPLICATION_JSON)
+			.content(objectMapper.writeValueAsString(request))
+		).andReturn().getResponse();
 
 		// then
 		Assertions.assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
