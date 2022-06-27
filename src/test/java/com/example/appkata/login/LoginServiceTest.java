@@ -32,5 +32,18 @@ class LoginServiceTest {
 		Assertions.assertThat(loginSession.getEmail()).isEqualTo(email);
 		Assertions.assertThat(loginSession.getUsername()).isEqualTo(expectedUsername);
 	}
+	@Test
+	void 로그인_실패_없는_이메일() {
+		// given
+		String email = "ejoongseok@gmail.com";
+		String expectedUsername = "ejoongseok";
+		accountRepository.save(new Account(expectedUsername, "email@gmail.com"));
+		LoginRequest request = new LoginRequest(email);
+
+		// when
+		Assertions.assertThatThrownBy(() -> loginService.login(request))
+			.isInstanceOf(IllegalArgumentException.class)
+			.hasMessageContaining("Account not found");
+	}
 
 }
