@@ -2,6 +2,8 @@ package com.example.appkata.account;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
+import java.io.UnsupportedEncodingException;
+
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -17,6 +19,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.example.appkata.account.application.AccountExceptionResponse;
 import com.example.appkata.account.application.CreateAccountRequest;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @SpringBootTest
@@ -26,23 +29,33 @@ class AccountApiTest {
 	@Autowired MockMvc mockMvc;
 	@Autowired ObjectMapper objectMapper;
 
-	@ParameterizedTest
-	@ValueSource(strings = { "joongseok", "joongseok@@gmail.com", "joongseok.gmail.com" })
+	@Test
 	@DisplayName("유효하지 않은 이메일 주소를 입력하면 Bad Request 응답. [유효하지 않은 이메일]")
-	void should_invalid_email_join_account_return_bad_request(String invalidEmail) throws Exception {
+	void should_invalid_email_join_account_return_bad_request() throws Exception {
 		// given
 		String username = "joongseok";
-		String exceptionMessage = "올바른 이메일 형식이 아닙니다.";
-		CreateAccountRequest request =  new CreateAccountRequest(username, invalidEmail);
+		badRequestAssertions("올바른 이메일 형식이 아닙니다.",
+			joinAccountRequest(new CreateAccountRequest(username, "joongseok")));
 
+		badRequestAssertions("올바른 이메일 형식이 아닙니다.",
+			joinAccountRequest(new CreateAccountRequest(username, "joongseok@@gmail.com")));
 
-		// when
-		MockHttpServletResponse response = mockMvc.perform(post("/accounts")
+		badRequestAssertions("올바른 이메일 형식이 아닙니다.",
+			joinAccountRequest(new CreateAccountRequest(username, "joongseok.gmail.com")));
+
+		badRequestAssertions("이메일을 입력해주세요.",
+			joinAccountRequest(new CreateAccountRequest(username, "")));
+	}
+
+	private MockHttpServletResponse joinAccountRequest(CreateAccountRequest request) throws Exception {
+		return mockMvc.perform(post("/accounts")
 			.contentType(MediaType.APPLICATION_JSON)
 			.content(objectMapper.writeValueAsString(request))
 		).andReturn().getResponse();
+	}
 
-		// then
+	private void badRequestAssertions(String exceptionMessage, MockHttpServletResponse response)
+		throws JsonProcessingException, UnsupportedEncodingException {
 		Assertions.assertThat(response.getStatus()).isEqualTo(HttpStatus.BAD_REQUEST.value());
 		AccountExceptionResponse exceptionResponse = objectMapper.readValue(response.getContentAsString(),
 			AccountExceptionResponse.class);
