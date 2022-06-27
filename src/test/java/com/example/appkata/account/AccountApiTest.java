@@ -13,6 +13,7 @@ import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.web.servlet.MockMvc;
 
+import com.example.appkata.account.application.AccountExceptionResponse;
 import com.example.appkata.account.application.CreateAccountRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -29,7 +30,7 @@ class AccountApiTest {
 		// given
 		String username = "joongseok";
 		String email = "joongseok";
-		String exceptionMessage = "유효하지 않은 이메일 주소입니다.";
+		String exceptionMessage = "올바른 이메일 형식이 아닙니다.";
 		CreateAccountRequest request =  new CreateAccountRequest(username, email);
 
 
@@ -43,14 +44,7 @@ class AccountApiTest {
 		Assertions.assertThat(response.getStatus()).isEqualTo(HttpStatus.BAD_REQUEST.value());
 		AccountExceptionResponse exceptionResponse = objectMapper.readValue(response.getContentAsString(),
 			AccountExceptionResponse.class);
-		Assertions.assertThat(exceptionResponse.getMessage()).isEqualTo(exceptionMessage);
+		Assertions.assertThat(exceptionResponse.getMessage()).contains(exceptionMessage);
 	}
 
-	private static class AccountExceptionResponse {
-		private String message;
-
-		public String getMessage() {
-			return message;
-		}
-	}
 }
