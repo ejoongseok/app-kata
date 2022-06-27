@@ -1,4 +1,4 @@
-package com.example.appkata.integartion;
+package com.example.appkata.login;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
@@ -22,7 +22,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-class LoginTest {
+class LoginApiTest {
 
 	@Autowired
 	MockMvc mockMvc;
