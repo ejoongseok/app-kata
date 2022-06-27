@@ -3,6 +3,8 @@ package com.example.appkata.login;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import com.example.appkata.account.application.AccountService;
 import com.example.appkata.account.domain.Account;
@@ -12,10 +14,17 @@ import com.example.appkata.login.application.LoginRequest;
 import com.example.appkata.login.application.LoginService;
 import com.example.appkata.login.application.LoginSession;
 
+@SpringBootTest
 class LoginServiceTest {
 
-	AccountRepository accountRepository = new MemoryAccountRepository();
-	LoginService loginService = new LoginService(accountRepository);
+	@Autowired AccountRepository accountRepository;
+	@Autowired LoginService loginService;
+
+	@BeforeEach
+	void setUp() {
+	    accountRepository.deleteAll();
+	}
+
 
 	@Test
 	void 로그인() {

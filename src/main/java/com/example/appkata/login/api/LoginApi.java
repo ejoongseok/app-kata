@@ -1,7 +1,5 @@
 package com.example.appkata.login.api;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,9 +19,8 @@ public class LoginApi {
 	public static final String LOGIN_USER_KEY = "LOGIN_USER";
 
 	@PostMapping("/login")
-	public LoginResponse login(@RequestBody LoginRequest request, HttpSession session) {
+	public LoginResponse login(@RequestBody LoginRequest request) {
 		LoginSession user = loginService.login(request);
-		session.setAttribute(LOGIN_USER_KEY, user);
 		return new LoginResponse(user.getEmail(), user.getUsername());
 	}
 }
