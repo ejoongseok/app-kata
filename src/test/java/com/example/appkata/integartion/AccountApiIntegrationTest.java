@@ -5,11 +5,15 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.test.mock.mockito.SpyBean;
+import org.springframework.boot.test.system.CapturedOutput;
+import org.springframework.boot.test.system.OutputCaptureExtension;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
@@ -22,15 +26,16 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@ExtendWith(OutputCaptureExtension.class)
 class AccountApiIntegrationTest {
 
 	@Autowired ObjectMapper objectMapper;
 	@Autowired MockMvc mockMvc;
-	@MockBean
+	@SpyBean
 	EmailSender emailSender;
 
 	@Test
-	void 회원_등록_요청() throws Exception {
+	void 회원_등록_요청(CapturedOutput capturedOutput) throws Exception {
 		// given
 		String username = "joongseok";
 		String email = "ejoongseok@gamil.com";
@@ -50,7 +55,10 @@ class AccountApiIntegrationTest {
 		Assertions.assertThat(createAccountResponse.getName()).isEqualTo(username);
 		Assertions.assertThat(createAccountResponse.getEmail()).isEqualTo(email);
 
+
 		verify(emailSender, times(1)).sendEmail(email, username);
+		String consoleEmailFormat = String.format("[EmailSender] 이메일을 보냅니다. email: %s, username: %s", email, username);
+		Assertions.assertThat(capturedOutput.getOut()).contains(consoleEmailFormat);
 	}
 
 }
