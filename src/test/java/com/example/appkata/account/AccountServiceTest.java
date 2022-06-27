@@ -7,10 +7,13 @@ import org.junit.jupiter.api.Test;
 import com.example.appkata.account.application.AccountService;
 import com.example.appkata.account.application.CreateAccountRequest;
 import com.example.appkata.account.domain.Account;
+import com.example.appkata.account.domain.AccountRepository;
+import com.example.appkata.account.infra.MemoryAccountRepository;
 
 class AccountServiceTest {
 
-	private AccountService accountService = new AccountService();
+	AccountRepository repository = new MemoryAccountRepository();
+	AccountService accountService = new AccountService(repository);
 
 	@Test
 	@DisplayName("사용자 정보 등록")
