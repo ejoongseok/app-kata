@@ -1,19 +1,20 @@
 package com.example.appkata.integartion;
 
-import java.awt.image.PixelGrabber;
-import java.io.UnsupportedEncodingException;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
+import org.springframework.test.web.servlet.MockMvc;
 
-import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 class AccountApiIntegrationTest {
 
 	ObjectMapper objectMapper;
+	MockMvc mockMvc;
 
 	@Test
 	void 회원_등록_요청() throws Exception {
@@ -22,7 +23,10 @@ class AccountApiIntegrationTest {
 		String email = "ejoongseok@gamil.com";
 
 		// when
-		MockHttpServletResponse response = null;
+		MockHttpServletResponse response = null = mockMvc.perform(post("/accounts")
+			.contentType(MediaType.APPLICATION_JSON)
+			.content(objectMapper.writeValueAsString(request))
+		);
 
 		// then
 		Assertions.assertThat(response.getStatus()).isEqualTo(HttpStatus.CREATED.value());
