@@ -4,6 +4,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
@@ -13,10 +16,12 @@ import com.example.appkata.account.application.CreateAccountRequest;
 import com.example.appkata.account.application.CreateAccountResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+@SpringBootTest
+@AutoConfigureMockMvc
 class AccountApiIntegrationTest {
 
-	ObjectMapper objectMapper;
-	MockMvc mockMvc;
+	@Autowired ObjectMapper objectMapper;
+	@Autowired MockMvc mockMvc;
 
 	@Test
 	void 회원_등록_요청() throws Exception {
