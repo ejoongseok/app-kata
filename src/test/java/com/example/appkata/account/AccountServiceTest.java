@@ -12,6 +12,7 @@ class AccountServiceTest {
 		// given
 
 		// when
+		Account account = accountService.join(request);
 
 		// then
 		Assertions.assertThat(account.getId()).isPositive();
