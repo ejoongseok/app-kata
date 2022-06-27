@@ -14,6 +14,9 @@ class AccountServiceTest {
 		// when
 
 		// then
+		Assertions.assertThat(account.getId()).isPositive();
+		Assertions.assertThat(account.getUsername()).isEqualTo(username);
+		Assertions.assertThat(account.getEmail()).isEqualTo(email);
 	}
 
 }
