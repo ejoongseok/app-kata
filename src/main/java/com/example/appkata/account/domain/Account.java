@@ -12,4 +12,8 @@ public class Account {
 		this.username = username;
 		this.email = email;
 	}
+
+	public void assignId(Long nextId) {
+		this.id = nextId;
+	}
 }
