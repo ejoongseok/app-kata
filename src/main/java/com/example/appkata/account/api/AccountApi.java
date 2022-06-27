@@ -1,5 +1,7 @@
 package com.example.appkata.account.api;
 
+import javax.validation.Valid;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,7 +25,7 @@ public class AccountApi {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public CreateAccountResponse createAccount(@RequestBody CreateAccountRequest request) {
+	public CreateAccountResponse createAccount(@RequestBody @Valid CreateAccountRequest request) {
 		Account newAccount = service.join(request);
 		return CreateAccountResponse.of(newAccount);
 	}

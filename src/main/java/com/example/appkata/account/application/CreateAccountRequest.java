@@ -1,5 +1,8 @@
 package com.example.appkata.account.application;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -7,6 +10,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CreateAccountRequest {
 	private String username;
+
+	@Email
+	@NotBlank
 	private String email;
 
 	public CreateAccountRequest(String username, String email) {
