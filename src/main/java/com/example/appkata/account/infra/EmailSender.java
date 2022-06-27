@@ -1,5 +1,6 @@
 package com.example.appkata.account.infra;
 
 public interface EmailSender {
-	void sendEmail();
+
+	void sendEmail(String email, String username);
 }

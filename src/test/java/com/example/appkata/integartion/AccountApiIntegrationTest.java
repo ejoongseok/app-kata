@@ -9,6 +9,7 @@ import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
@@ -25,7 +26,8 @@ class AccountApiIntegrationTest {
 
 	@Autowired ObjectMapper objectMapper;
 	@Autowired MockMvc mockMvc;
-	@Mock EmailSender emailSender;
+	@MockBean
+	EmailSender emailSender;
 
 	@Test
 	void 회원_등록_요청() throws Exception {
@@ -48,7 +50,7 @@ class AccountApiIntegrationTest {
 		Assertions.assertThat(createAccountResponse.getName()).isEqualTo(username);
 		Assertions.assertThat(createAccountResponse.getEmail()).isEqualTo(email);
 
-		verify(emailSender, times(1)).sendEmail();
+		verify(emailSender, times(1)).sendEmail(email, username);
 	}
 
 }

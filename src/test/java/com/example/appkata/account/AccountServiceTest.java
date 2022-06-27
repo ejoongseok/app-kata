@@ -3,17 +3,17 @@ package com.example.appkata.account;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import com.example.appkata.account.application.AccountService;
 import com.example.appkata.account.application.CreateAccountRequest;
 import com.example.appkata.account.domain.Account;
-import com.example.appkata.account.domain.AccountRepository;
-import com.example.appkata.account.infra.MemoryAccountRepository;
 
+@SpringBootTest
 class AccountServiceTest {
 
-	AccountRepository repository = new MemoryAccountRepository();
-	AccountService accountService = new AccountService(repository);
+	@Autowired AccountService accountService;
 
 	@Test
 	@DisplayName("사용자 정보 등록")
