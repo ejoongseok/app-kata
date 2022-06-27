@@ -9,6 +9,8 @@ import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.web.servlet.MockMvc;
 
+import com.example.appkata.account.application.CreateAccountRequest;
+import com.example.appkata.account.application.CreateAccountResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 class AccountApiIntegrationTest {
@@ -38,32 +40,4 @@ class AccountApiIntegrationTest {
 		Assertions.assertThat(createAccountResponse.getEmail()).isEqualTo(email);
 	}
 
-
-	private static class CreateAccountResponse {
-		private long id;
-		private String name;
-		private String email;
-
-		public long getId() {
-			return id;
-		}
-
-		public String getName() {
-			return name;
-		}
-
-		public String getEmail() {
-			return email;
-		}
-	}
-
-	private static class CreateAccountRequest {
-		private final String username;
-		private final String email;
-
-		public CreateAccountRequest(String username, String email) {
-			this.username = username;
-			this.email = email;
-		}
-	}
 }
