@@ -1,6 +1,7 @@
 package com.example.appkata.account.infra;
 
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -18,6 +19,14 @@ public class MemoryAccountRepository implements AccountRepository {
 	public void save(Account account) {
 		account.assignId(nextId());
 		persistentMap.put(account.getId(), account);
+	}
+
+	@Override
+	public Optional<Account> findByEmail(String email) {
+		return persistentMap.values()
+			.stream()
+			.filter(account -> account.getEmail().equals(email))
+			.findFirst();
 	}
 
 	private Long nextId() {

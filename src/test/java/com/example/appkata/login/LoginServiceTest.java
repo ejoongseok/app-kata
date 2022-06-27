@@ -9,7 +9,7 @@ import com.example.appkata.login.application.LoginSession;
 
 class LoginServiceTest {
 
-	private LoginService loginService;
+	private LoginService loginService = new LoginService();
 
 	@Test
 	void 로그인() {
