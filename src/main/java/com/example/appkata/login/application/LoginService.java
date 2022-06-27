@@ -1,11 +1,16 @@
 package com.example.appkata.login.application;
 
+import org.springframework.stereotype.Service;
+
 import com.example.appkata.account.domain.Account;
 import com.example.appkata.account.domain.AccountRepository;
-import com.example.appkata.account.infra.MemoryAccountRepository;
 
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
 public class LoginService {
-	private AccountRepository accountRepository = new MemoryAccountRepository();
+	private final AccountRepository accountRepository;
 	public LoginSession login(LoginRequest request) {
 		Account account = accountRepository.findByEmail(request.getEmail())
 			.orElseThrow(() -> new IllegalArgumentException("Account not found"));

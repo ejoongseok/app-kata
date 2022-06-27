@@ -1,15 +1,21 @@
 package com.example.appkata.login;
 
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import com.example.appkata.account.application.AccountService;
+import com.example.appkata.account.domain.Account;
+import com.example.appkata.account.domain.AccountRepository;
+import com.example.appkata.account.infra.MemoryAccountRepository;
 import com.example.appkata.login.application.LoginRequest;
 import com.example.appkata.login.application.LoginService;
 import com.example.appkata.login.application.LoginSession;
 
 class LoginServiceTest {
 
-	private LoginService loginService = new LoginService();
+	AccountRepository accountRepository = new MemoryAccountRepository();
+	LoginService loginService = new LoginService(accountRepository);
 
 	@Test
 	void 로그인() {
@@ -17,6 +23,7 @@ class LoginServiceTest {
 		String email = "ejoongseok@gmail.com";
 		String expectedUsername = "ejoongseok";
 		LoginRequest request = new LoginRequest(email);
+		accountRepository.save(new Account(expectedUsername, email));
 
 		// when
 		LoginSession loginSession = loginService.login(request);
