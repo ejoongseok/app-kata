@@ -29,6 +29,11 @@ public class MemoryAccountRepository implements AccountRepository {
 			.findFirst();
 	}
 
+	@Override
+	public void deleteAll() {
+		persistentMap.clear();
+	}
+
 	private Long nextId() {
 		return id.getAndIncrement();
 	}
