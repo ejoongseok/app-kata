@@ -21,12 +21,13 @@ class AccountApiIntegrationTest {
 		// given
 		String username = "joongseok";
 		String email = "ejoongseok@gamil.com";
+		CreateAccountRequest request = new CreateAccountRequest(username, email);
 
 		// when
-		MockHttpServletResponse response = null = mockMvc.perform(post("/accounts")
+		MockHttpServletResponse response = mockMvc.perform(post("/accounts")
 			.contentType(MediaType.APPLICATION_JSON)
 			.content(objectMapper.writeValueAsString(request))
-		);
+		).andReturn().getResponse();
 
 		// then
 		Assertions.assertThat(response.getStatus()).isEqualTo(HttpStatus.CREATED.value());
@@ -53,6 +54,16 @@ class AccountApiIntegrationTest {
 
 		public String getEmail() {
 			return email;
+		}
+	}
+
+	private static class CreateAccountRequest {
+		private final String username;
+		private final String email;
+
+		public CreateAccountRequest(String username, String email) {
+			this.username = username;
+			this.email = email;
 		}
 	}
 }
