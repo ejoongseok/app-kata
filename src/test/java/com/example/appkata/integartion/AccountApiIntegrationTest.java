@@ -60,15 +60,24 @@ class AccountApiIntegrationTest {
 	}
 
 	@Test
-	void 회원_수정_요청() {
+	void 회원_수정_요청() throws Exception {
 		// given
-
+		String expectedUsername = "joongSeok";
 		// when
+		MockHttpServletResponse response = null;
 
 		// then
 		Assertions.assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
-		Assertions.assertThat(updateAccountResponse().getName()).isEqualTo(expectedUsername);
+		UpdateAccountResponse updateAccountResponse = objectMapper.readValue(response.getContentAsString(),
+			UpdateAccountResponse.class);
+		Assertions.assertThat(updateAccountResponse.getName()).isEqualTo(expectedUsername);
 	}
 
+	private static class UpdateAccountResponse {
+		private String name;
 
+		public String getName() {
+			return name;
+		}
+	}
 }
