@@ -51,5 +51,16 @@ class ProductServiceTest {
 		Assertions.assertThat(product.getPrice()).isEqualTo(newPrice);
 	}
 
+	@Test
+	@DisplayName("상품 조회")
+	void get_product_test() {
+		// given
+
+		// when
+
+		// then
+	}
+
+
 
 }
