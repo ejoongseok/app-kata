@@ -16,7 +16,6 @@ import lombok.RequiredArgsConstructor;
 public class LoginApi {
 
 	private final LoginService loginService;
-	public static final String LOGIN_USER_KEY = "LOGIN_USER";
 
 	@PostMapping("/login")
 	public LoginResponse login(@RequestBody LoginRequest request) {
