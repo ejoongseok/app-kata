@@ -52,4 +52,14 @@ class OrderApiIntegrationTest {
 		Assertions.assertThat(createOrderResponse.getProductName()).isEqualTo(product.getName());
 	}
 
+	@Test
+	void 주문_조회(){
+		// given
+
+		// when
+
+		// then
+	}
+
+
 }
