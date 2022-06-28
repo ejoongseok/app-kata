@@ -1,11 +1,16 @@
 package com.example.appkata.module.product.application;
 
+import org.springframework.stereotype.Service;
+
 import com.example.appkata.module.product.domain.Product;
 import com.example.appkata.module.product.domain.ProductRepository;
-import com.example.appkata.module.product.infra.MemoryProductRepository;
 
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
 public class ProductService {
-	private ProductRepository productRepository = new MemoryProductRepository();
+	private final ProductRepository productRepository;
 
 	public Product createProduct(CreateProductRequest request) {
 		Product product = new Product(request.getProductName(), request.getPrice());

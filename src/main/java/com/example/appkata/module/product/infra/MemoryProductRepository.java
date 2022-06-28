@@ -4,9 +4,12 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
+import org.springframework.stereotype.Repository;
+
 import com.example.appkata.module.product.domain.Product;
 import com.example.appkata.module.product.domain.ProductRepository;
 
+@Repository
 public class MemoryProductRepository implements ProductRepository {
 
 	private final Map<Long, Product> persistMap = new ConcurrentHashMap<>();

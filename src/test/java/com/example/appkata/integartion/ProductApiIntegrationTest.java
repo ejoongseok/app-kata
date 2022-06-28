@@ -24,7 +24,7 @@ class ProductApiIntegrationTest {
 	@Autowired MockMvc mockMvc;
 
 	@Test
-	void 상품_등록() throws Exception {
+	void 상품_등록_요청() throws Exception {
 		// given
 		String productName = "노트북";
 		int price = 1_000_000;

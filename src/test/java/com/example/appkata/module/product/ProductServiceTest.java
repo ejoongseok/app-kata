@@ -7,10 +7,11 @@ import org.junit.jupiter.api.Test;
 import com.example.appkata.module.product.application.CreateProductRequest;
 import com.example.appkata.module.product.application.ProductService;
 import com.example.appkata.module.product.domain.Product;
+import com.example.appkata.module.product.infra.MemoryProductRepository;
 
 class ProductServiceTest {
 
-	private ProductService productService = new ProductService();
+	private ProductService productService = new ProductService(new MemoryProductRepository());
 
 	@Test
 	@DisplayName("상품 등록")
