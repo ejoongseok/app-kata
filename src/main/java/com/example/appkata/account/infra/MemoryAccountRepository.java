@@ -34,6 +34,11 @@ public class MemoryAccountRepository implements AccountRepository {
 		persistentMap.clear();
 	}
 
+	@Override
+	public Optional<Account> findById(Long loginUserId) {
+		return Optional.ofNullable(persistentMap.get(loginUserId));
+	}
+
 	private Long nextId() {
 		return id.getAndIncrement();
 	}
