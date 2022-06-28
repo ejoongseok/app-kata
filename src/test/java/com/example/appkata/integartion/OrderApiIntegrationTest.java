@@ -2,8 +2,6 @@ package com.example.appkata.integartion;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
-import java.awt.image.PixelGrabber;
-
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +12,11 @@ import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.web.servlet.MockMvc;
 
+import com.example.appkata.fixture.OrderFixture;
 import com.example.appkata.fixture.ProductFixture;
 import com.example.appkata.module.order.application.CreateOrderRequest;
 import com.example.appkata.module.order.application.CreateOrderResponse;
-import com.example.appkata.module.order.application.OrderService;
+import com.example.appkata.module.order.application.FindOrderResponse;
 import com.example.appkata.module.order.domain.Order;
 import com.example.appkata.module.product.domain.Product;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -30,7 +29,8 @@ class OrderApiIntegrationTest {
 	@Autowired ObjectMapper objectMapper;
 
 	@Autowired ProductFixture productFixture;
-	@Autowired OrderFixture orderFixture;
+	@Autowired
+	OrderFixture orderFixture;
 
 	@Test
 	void 주문_요청() throws Exception {
@@ -80,40 +80,4 @@ class OrderApiIntegrationTest {
 		Assertions.assertThat(findOrderResponse.getQuantity()).isEqualTo(order.getQuantity());
 	}
 
-	private static class FindOrderResponse {
-		private Long id;
-		private Long productId;
-		private String productName;
-		private int totalPrice;
-		private int quantity;
-
-		public Long getId() {
-			return id;
-		}
-
-		public Long getProductId() {
-			return productId;
-		}
-
-		public String getProductName() {
-			return productName;
-		}
-
-		public int getTotalPrice() {
-			return totalPrice;
-		}
-
-		public int getQuantity() {
-			return quantity;
-		}
-	}
-
-	private static class OrderFixture {
-		OrderService orderService;
-		public Order createOrder(Product product, int quantity) {
-			CreateOrderRequest request = CreateOrderRequest.of(product.getId(), quantity);
-			Order order = orderService.order(request);
-			return order;
-		}
-	}
 }
