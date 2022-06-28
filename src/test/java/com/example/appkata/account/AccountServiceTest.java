@@ -10,11 +10,15 @@ import com.example.appkata.account.application.AccountService;
 import com.example.appkata.account.application.CreateAccountRequest;
 import com.example.appkata.account.application.UpdateAccountRequest;
 import com.example.appkata.account.domain.Account;
+import com.example.appkata.fixture.SessionFixture;
 
 @SpringBootTest
 class AccountServiceTest {
 
 	@Autowired AccountService accountService;
+
+	@Autowired
+	SessionFixture sessionFixture;
 
 	@Test
 	@DisplayName("사용자 정보 등록")
@@ -37,7 +41,7 @@ class AccountServiceTest {
 	@DisplayName("사용자 이름 수정")
 	void update_username_test() {
 		// given
-		accountService.join(new CreateAccountRequest("joongseok", "joongseok@gamil.com");
+		sessionFixture.createSessionUser();
 		String updateUsername = "joongSeok";
 		UpdateAccountRequest request = new UpdateAccountRequest(updateUsername);
 		// when

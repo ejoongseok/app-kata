@@ -1,7 +1,9 @@
 package com.example.appkata.integartion;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.BDDMockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+
+import javax.transaction.Transactional;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -15,6 +17,7 @@ import org.springframework.boot.test.system.OutputCaptureExtension;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
+import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.example.appkata.account.application.CreateAccountRequest;
@@ -22,6 +25,7 @@ import com.example.appkata.account.application.CreateAccountResponse;
 import com.example.appkata.account.application.UpdateAccountRequest;
 import com.example.appkata.account.application.UpdateAccountResponse;
 import com.example.appkata.account.infra.EmailSender;
+import com.example.appkata.fixture.SessionFixture;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @SpringBootTest
@@ -62,14 +66,18 @@ class AccountApiIntegrationTest {
 	}
 
 	@Test
+	@Transactional
 	void 회원_수정_요청() throws Exception {
 		// given
+		MockHttpSession session = SessionFixture.getLoginSession(mockMvc, objectMapper);
 		String expectedUsername = "joongSeok";
 		UpdateAccountRequest request = new UpdateAccountRequest(expectedUsername);
+
 		// when
 		MockHttpServletResponse response = mockMvc.perform(patch("/accounts")
 			.contentType(MediaType.APPLICATION_JSON)
 			.content(objectMapper.writeValueAsString(request))
+			.session(session)
 		).andReturn().getResponse();
 
 		// then
