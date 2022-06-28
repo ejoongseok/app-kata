@@ -1,6 +1,8 @@
 package com.example.appkata.module.order.api;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.appkata.module.order.application.CreateOrderRequest;
 import com.example.appkata.module.order.application.CreateOrderResponse;
+import com.example.appkata.module.order.application.FindOrderResponse;
 import com.example.appkata.module.order.application.OrderService;
 import com.example.appkata.module.order.domain.Order;
 
@@ -27,4 +30,10 @@ public class OrderApi {
 		Order order = orderService.order(request);
 		return new CreateOrderResponse(order);
 	}
+
+	@GetMapping("/{orderId}")
+	public FindOrderResponse findOrder(@PathVariable("orderId") long orderId) {
+		return null;
+	}
+
 }
