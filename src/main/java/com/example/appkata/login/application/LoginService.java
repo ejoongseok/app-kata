@@ -1,9 +1,5 @@
 package com.example.appkata.login.application;
 
-import static com.example.appkata.login.api.LoginApi.*;
-
-import javax.servlet.http.HttpSession;
-
 import org.springframework.stereotype.Service;
 
 import com.example.appkata.account.domain.Account;
@@ -15,12 +11,18 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class LoginService {
 	private final AccountRepository accountRepository;
-	private final HttpSession session;
+	private final AccountSessionManager sessionManager;
 	public LoginSession login(LoginRequest request) {
 		Account account = accountRepository.findByEmail(request.getEmail())
 			.orElseThrow(() -> new IllegalArgumentException("Account not found"));
 		LoginSession loginSession = new LoginSession(account.getEmail(), account.getUsername());
-		session.setAttribute(LOGIN_USER_KEY, loginSession);
+		sessionManager.saveLoginUserId(account.getId());
 		return loginSession;
+	}
+
+	public Account getUser() {
+		Long loginUserId = sessionManager.getLoginUserId();
+		return accountRepository.findById(loginUserId)
+			.orElseThrow(() -> new IllegalArgumentException("Account not found"));
 	}
 }
