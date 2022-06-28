@@ -84,6 +84,10 @@ class ProductApiIntegrationTest {
 		// when
 
 		// then
+		Assertions.assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
+		Assertions.assertThat(findProductResponse.getId()).isEqualTo(product.getId());
+		Assertions.assertThat(findProductResponse.getProductName()).isEqualTo(product.getProductName());
+		Assertions.assertThat(findProductResponse.getPrice()).isEqualTo(product.getPrice());
 	}
 
 }
