@@ -2,6 +2,8 @@ package com.example.appkata.integartion;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
+import java.awt.image.PixelGrabber;
+
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,16 +80,37 @@ class ProductApiIntegrationTest {
 	}
 
 	@Test
-	void 상품_조회_요청() {
+	void 상품_조회_요청() throws Exception {
 		// given
+		Product product = productFixture.createProduct("노트북", 1_000_000);
 
 		// when
+		MockHttpServletResponse response = mockMvc.perform(get("/products/{id}", product.getId())
+		).andReturn().getResponse();
 
 		// then
 		Assertions.assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
+		FindProductResponse findProductResponse = objectMapper.readValue(response.getContentAsString(), FindProductResponse.class);
 		Assertions.assertThat(findProductResponse.getId()).isEqualTo(product.getId());
-		Assertions.assertThat(findProductResponse.getProductName()).isEqualTo(product.getProductName());
+		Assertions.assertThat(findProductResponse.getProductName()).isEqualTo(product.getName());
 		Assertions.assertThat(findProductResponse.getPrice()).isEqualTo(product.getPrice());
 	}
 
+	private static class FindProductResponse {
+		private long id;
+		private String productName;
+		private int price;
+
+		public long getId() {
+			return id;
+		}
+
+		public String getProductName() {
+			return productName;
+		}
+
+		public int getPrice() {
+			return price;
+		}
+	}
 }
