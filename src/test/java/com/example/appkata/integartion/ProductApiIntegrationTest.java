@@ -2,8 +2,6 @@ package com.example.appkata.integartion;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
-import java.awt.image.PixelGrabber;
-
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +12,11 @@ import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.web.servlet.MockMvc;
 
+import com.example.appkata.fixture.ProductFixture;
 import com.example.appkata.module.product.application.CreateProductRequest;
 import com.example.appkata.module.product.application.CreateProductResponse;
-import com.example.appkata.module.product.application.ProductService;
+import com.example.appkata.module.product.application.UpdateProductRequest;
+import com.example.appkata.module.product.application.UpdateProductResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @SpringBootTest
@@ -76,41 +76,4 @@ class ProductApiIntegrationTest {
 		Assertions.assertThat(updateProductResponse.getPrice()).isEqualTo(newPrice);
 	}
 
-	private static class UpdateProductRequest {
-		private final String productName;
-		private final int price;
-		public UpdateProductRequest(String productName, int price) {
-			this.productName = productName;
-			this.price = price;
-		}
-
-		public static UpdateProductRequest of(String newProductName, int newPrice) {
-			return new UpdateProductRequest(newProductName, newPrice);
-		}
-	}
-
-	private static class UpdateProductResponse {
-		private Long id;
-		private String productName;
-		private int price;
-
-		public Long getId() {
-			return id;
-		}
-
-		public String getProductName() {
-			return productName;
-		}
-
-		public int getPrice() {
-			return price;
-		}
-	}
-
-	private class ProductFixture {
-
-		public void createProduct(String oldProductName, int oldPrice) {
-
-		}
-	}
 }
