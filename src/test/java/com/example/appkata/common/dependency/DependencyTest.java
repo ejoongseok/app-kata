@@ -18,6 +18,7 @@ class DependencyTest {
 	private static final String PRODUCT_PACKAGE = "..product..";
 	private static final String COMMON_PACKAGE = "..common..";
 	private static final String MODULE_PACKAGE = "..module..";
+	private static final String ORDER_PACKAGE = "..order..";
 	private static final String API_LAYER = "Api";
 	private static final String APPLICATION_LAYER = "Application";
 
@@ -47,11 +48,11 @@ class DependencyTest {
 			.should().onlyBeAccessed().byClassesThat()
 			.resideInAnyPackage(MODULE_PACKAGE);
 
-	@ArchTest // product 패키지는 product 패키지만 의존한다.
+	@ArchTest // product 패키지는 product, order 패키지만 의존한다.
 	static final ArchRule product_should_product_depend_on =
 		classes().that().resideInAPackage(PRODUCT_PACKAGE)
 			.should().onlyBeAccessed().byClassesThat()
-			.resideInAnyPackage(PRODUCT_PACKAGE);
+			.resideInAnyPackage(ORDER_PACKAGE, PRODUCT_PACKAGE);
 
 
 	@ArchTest // application 패키지는 api 패키지에서만 엑세스 해야함
