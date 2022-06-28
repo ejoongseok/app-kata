@@ -1,4 +1,4 @@
-package com.example.appkata.module.login.application;
+package com.example.appkata.module.account.application;
 
 import javax.servlet.http.HttpSession;
 

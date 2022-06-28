@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import com.example.appkata.module.account.domain.Account;
 import com.example.appkata.module.account.domain.AccountRepository;
 import com.example.appkata.module.account.infra.CreatedAccountEmailSendEvent;
-import com.example.appkata.module.login.application.LoginService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -14,8 +13,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class AccountService {
 	private final AccountRepository repository;
-	private final LoginService loginService;
-
+	private final AccountSessionManager sessionManager;
 	private final ApplicationEventPublisher publisher;
 
 
@@ -27,17 +25,19 @@ public class AccountService {
 	}
 
 	public Account updateUsername(UpdateAccountRequest request) {
-		Account user = loginService.getUser();
+		Account user = getUser();
 		user.updateUsername(request.getUsername());
 		return new Account(user.getUsername(), user.getEmail());
 	}
 
 	public boolean removeUser() {
-		Account user = loginService.getUser();
+		Account user = getUser();
 		return repository.delete(user);
 	}
 
 	public Account getUser() {
-		return loginService.getUser();
+		Long loginUserId = sessionManager.getLoginUserId();
+		return repository.findById(loginUserId)
+			.orElseThrow(() -> new IllegalArgumentException("Account not found"));
 	}
 }

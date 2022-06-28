@@ -1,7 +1,7 @@
 package com.example.appkata.login;
 
 import static com.example.appkata.fixture.AccountFixture.*;
-import static com.example.appkata.module.login.application.AccountSessionManager.*;
+import static com.example.appkata.module.account.application.AccountSessionManager.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
 import javax.servlet.http.HttpSession;

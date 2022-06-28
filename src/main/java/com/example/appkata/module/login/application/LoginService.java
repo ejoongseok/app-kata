@@ -2,6 +2,7 @@ package com.example.appkata.module.login.application;
 
 import org.springframework.stereotype.Service;
 
+import com.example.appkata.module.account.application.AccountSessionManager;
 import com.example.appkata.module.account.domain.Account;
 import com.example.appkata.module.account.domain.AccountRepository;
 
@@ -18,11 +19,5 @@ public class LoginService {
 		LoginSession loginSession = new LoginSession(account.getEmail(), account.getUsername());
 		sessionManager.saveLoginUserId(account.getId());
 		return loginSession;
-	}
-
-	public Account getUser() {
-		Long loginUserId = sessionManager.getLoginUserId();
-		return accountRepository.findById(loginUserId)
-			.orElseThrow(() -> new IllegalArgumentException("Account not found"));
 	}
 }
