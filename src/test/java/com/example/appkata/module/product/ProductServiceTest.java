@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
 
 import com.example.appkata.module.product.application.CreateProductRequest;
 import com.example.appkata.module.product.application.ProductService;
@@ -59,6 +60,10 @@ class ProductServiceTest {
 		// when
 
 		// then
+		Assertions.assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
+		Assertions.assertThat(findProductResponse.getId()).isEqualTo(product.getId());
+		Assertions.assertThat(findProductResponse.getProductName()).isEqualTo(product.getName());
+		Assertions.assertThat(findProductResponse.getPrice()).isEqualTo(product.getPrice());
 	}
 
 
