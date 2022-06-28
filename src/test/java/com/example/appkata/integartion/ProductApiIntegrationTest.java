@@ -17,6 +17,7 @@ import com.example.appkata.module.product.application.CreateProductRequest;
 import com.example.appkata.module.product.application.CreateProductResponse;
 import com.example.appkata.module.product.application.UpdateProductRequest;
 import com.example.appkata.module.product.application.UpdateProductResponse;
+import com.example.appkata.module.product.domain.Product;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @SpringBootTest
@@ -55,12 +56,12 @@ class ProductApiIntegrationTest {
 		// given
 		String oldProductName = "노트북";
 		int oldPrice = 1_000_000;
-		productFixture.createProduct(oldProductName, oldPrice);
+		Product product = productFixture.createProduct(oldProductName, oldPrice);
 
-		Long productId = 1L;
+		Long productId = product.getId();
 		String newProductName = "노트북2";
 		int newPrice = 2_000_000;
-		UpdateProductRequest request = UpdateProductRequest.of(newProductName, newPrice);
+		UpdateProductRequest request = UpdateProductRequest.of(productId, newProductName, newPrice);
 
 		// when
 		MockHttpServletResponse response = mockMvc.perform(put("/products/{id}", productId)
@@ -69,7 +70,7 @@ class ProductApiIntegrationTest {
 		).andReturn().getResponse();
 
 		// then
-		Assertions.assertThat(response.getStatus()).isEqualTo(HttpStatus.CREATED.value());
+		Assertions.assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
 		UpdateProductResponse updateProductResponse = objectMapper.readValue(response.getContentAsString(), UpdateProductResponse.class);
 		Assertions.assertThat(updateProductResponse.getId()).isEqualTo(productId);
 		Assertions.assertThat(updateProductResponse.getProductName()).isEqualTo(newProductName);

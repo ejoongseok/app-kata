@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 
 import com.example.appkata.module.product.application.CreateProductRequest;
 import com.example.appkata.module.product.application.ProductService;
+import com.example.appkata.module.product.domain.Product;
 
 @Component
 public class ProductFixture {
@@ -14,8 +15,8 @@ public class ProductFixture {
 		this.productService = productService;
 	}
 
-	public void createProduct(String oldProductName, int oldPrice) {
+	public Product createProduct(String oldProductName, int oldPrice) {
 		CreateProductRequest request = new CreateProductRequest(oldProductName, oldPrice);
-		productService.createProduct(request);
+		return productService.createProduct(request);
 	}
 }
