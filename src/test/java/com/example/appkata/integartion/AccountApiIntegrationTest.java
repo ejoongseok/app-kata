@@ -21,6 +21,8 @@ import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.web.servlet.MockMvc;
 
+import com.example.appkata.fixture.AccountFixture;
+import com.example.appkata.fixture.SessionFixture;
 import com.example.appkata.module.account.application.CreateAccountRequest;
 import com.example.appkata.module.account.application.CreateAccountResponse;
 import com.example.appkata.module.account.application.FindAccountResponse;
@@ -28,8 +30,6 @@ import com.example.appkata.module.account.application.UpdateAccountRequest;
 import com.example.appkata.module.account.application.UpdateAccountResponse;
 import com.example.appkata.module.account.domain.AccountRepository;
 import com.example.appkata.module.account.infra.EmailSender;
-import com.example.appkata.fixture.AccountFixture;
-import com.example.appkata.fixture.SessionFixture;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @SpringBootTest
@@ -72,6 +72,7 @@ class AccountApiIntegrationTest {
 		Assertions.assertThat(createAccountResponse.getName()).isEqualTo(username);
 		Assertions.assertThat(createAccountResponse.getEmail()).isEqualTo(email);
 
+		Thread.sleep(1000);
 
 		verify(emailSender, times(1)).sendEmail(email, username);
 		String consoleEmailFormat = String.format("[EmailSender] 이메일을 보냅니다. email: %s, username: %s", email, username);
