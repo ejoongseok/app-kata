@@ -1,7 +1,5 @@
 package com.example.appkata.module.product.application;
 
-import java.util.Optional;
-
 import org.springframework.stereotype.Service;
 
 import com.example.appkata.module.product.domain.Product;
@@ -21,11 +19,13 @@ public class ProductService {
 	}
 
 	public Product updateProduct(UpdateProductRequest request) {
-		Product product = productRepository.findById(request.getId())
-			.orElseThrow(() -> new IllegalArgumentException("Product not found"));
-
+		Product product = findProduct(request.getId());
 		product.update(request.getProductName(), request.getPrice());
-
 		return product;
+	}
+
+	public Product findProduct(Long id) {
+		return productRepository.findById(id)
+			.orElseThrow(() -> new IllegalArgumentException("Product not found"));
 	}
 }
