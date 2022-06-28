@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class AccountService {
 	private final AccountRepository repository;
+	private final LoginService loginService;
 
 	private final ApplicationEventPublisher publisher;
 
@@ -26,6 +27,8 @@ public class AccountService {
 	}
 
 	public Account updateUsername(UpdateAccountRequest request) {
-		return null;
+		Account user = loginService.getUser();
+		user.updateUsername(request.getUsername());
+		return new Account(user.getUsername(), user.getEmail());
 	}
 }

@@ -39,7 +39,8 @@ public class AccountApi {
 	@PatchMapping
 	@ResponseStatus(HttpStatus.OK)
 	public UpdateAccountResponse updateAccount(@RequestBody UpdateAccountRequest request) {
-		return null;
+		Account account = service.updateUsername(request);
+		return new UpdateAccountResponse(account.getUsername());
 	}
 
 	@ExceptionHandler(MethodArgumentNotValidException.class)

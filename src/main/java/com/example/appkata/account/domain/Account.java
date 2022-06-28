@@ -16,4 +16,8 @@ public class Account {
 	public void assignId(Long nextId) {
 		this.id = nextId;
 	}
+
+	public void updateUsername(String username) {
+		this.username = username;
+	}
 }
