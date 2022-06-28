@@ -3,9 +3,6 @@ package com.example.appkata.integartion;
 import static org.mockito.BDDMockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
-import java.awt.image.PixelGrabber;
-
-import javax.sql.RowSet;
 import javax.transaction.Transactional;
 
 import org.assertj.core.api.Assertions;
@@ -25,6 +22,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.example.appkata.account.application.CreateAccountRequest;
 import com.example.appkata.account.application.CreateAccountResponse;
+import com.example.appkata.account.application.FindAccountResponse;
 import com.example.appkata.account.application.UpdateAccountRequest;
 import com.example.appkata.account.application.UpdateAccountResponse;
 import com.example.appkata.account.infra.EmailSender;
@@ -119,16 +117,4 @@ class AccountApiIntegrationTest {
 		Assertions.assertThat(findAccountResponse.getEmail()).isEqualTo(AccountFixture.FIXTURE_USER_EMAIL);
 	}
 
-	private static class FindAccountResponse {
-		private String username;
-		private String email;
-
-		public String getEmail() {
-			return email;
-		}
-
-		public String getUsername() {
-			return username;
-		}
-	}
 }
