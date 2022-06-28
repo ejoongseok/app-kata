@@ -1,5 +1,8 @@
 package com.example.appkata.module.product.application;
 
+import lombok.Getter;
+
+@Getter
 public class UpdateProductRequest {
 	private final String productName;
 	private final int price;
