@@ -51,5 +51,17 @@ class AccountServiceTest {
 		Assertions.assertThat(updateAccount.getUsername()).isEqualTo(updateUsername);
 	}
 
+	@Test
+	@DisplayName("사용자 삭제")
+	void remove_user_test() {
+		// given
+		sessionFixture.createSessionUser();
+		// when
+	    boolean result = accountService.removeUser();
+		// then
+		Assertions.assertThat(result).isTrue();
+	}
+
+
 
 }
