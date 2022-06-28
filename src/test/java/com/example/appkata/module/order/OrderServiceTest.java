@@ -3,6 +3,8 @@ package com.example.appkata.module.order;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import com.example.appkata.fixture.ProductFixture;
 import com.example.appkata.module.order.application.CreateOrderRequest;
@@ -10,10 +12,11 @@ import com.example.appkata.module.order.application.OrderService;
 import com.example.appkata.module.order.domain.Order;
 import com.example.appkata.module.product.domain.Product;
 
+@SpringBootTest
 class OrderServiceTest {
 
-	ProductFixture productFixture;
-	OrderService orderService;
+	@Autowired ProductFixture productFixture;
+	@Autowired OrderService orderService;
 
 	@Test
 	void 상품_주문() {
