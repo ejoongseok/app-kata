@@ -26,7 +26,7 @@ class ProductApiIntegrationTest {
 	@Autowired ObjectMapper objectMapper;
 	@Autowired MockMvc mockMvc;
 
-	ProductFixture productFixture;
+	@Autowired ProductFixture productFixture;
 
 	@Test
 	void 상품_등록_요청() throws Exception {
