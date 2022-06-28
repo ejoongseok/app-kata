@@ -4,6 +4,7 @@ import javax.validation.Valid;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -41,6 +42,12 @@ public class AccountApi {
 	public UpdateAccountResponse updateAccount(@RequestBody UpdateAccountRequest request) {
 		Account account = service.updateUsername(request);
 		return new UpdateAccountResponse(account.getUsername());
+	}
+
+	@DeleteMapping
+	@ResponseStatus(HttpStatus.OK)
+	public void deleteAccount() {
+		service.removeUser();
 	}
 
 	@ExceptionHandler(MethodArgumentNotValidException.class)
