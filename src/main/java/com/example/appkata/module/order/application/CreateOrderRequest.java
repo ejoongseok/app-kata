@@ -1,5 +1,8 @@
 package com.example.appkata.module.order.application;
 
+import lombok.Getter;
+
+@Getter
 public class CreateOrderRequest {
 	private long productId;
 	private int quantity;
