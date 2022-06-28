@@ -87,4 +87,17 @@ class AccountApiIntegrationTest {
 		Assertions.assertThat(updateAccountResponse.getName()).isEqualTo(expectedUsername);
 	}
 
+	@Test
+	void 회원_삭제_요청() throws Exception {
+		// given
+
+		// when
+		MockHttpServletResponse response = mockMvc.perform(delete("/accounts")
+			.session(SessionFixture.getLoginSession(mockMvc, objectMapper))
+		).andReturn().getResponse();
+		// then
+		Assertions.assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
+	}
+
+
 }
