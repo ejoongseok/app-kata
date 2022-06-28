@@ -1,6 +1,7 @@
 package com.example.appkata.module.product.infra;
 
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -19,6 +20,11 @@ public class MemoryProductRepository implements ProductRepository {
 	public void save(Product product) {
 		product.assignId(nextId());
 		persistMap.put(product.getId(), product);
+	}
+
+	@Override
+	public Optional<Product> findById(Long id) {
+		return Optional.ofNullable(persistMap.get(id));
 	}
 
 	private long nextId() {
