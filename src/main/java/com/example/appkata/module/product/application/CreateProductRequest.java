@@ -1,8 +1,10 @@
 package com.example.appkata.module.product.application;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
+@NoArgsConstructor(access = lombok.AccessLevel.PROTECTED)
 public class CreateProductRequest {
 	private String productName;
 	private int price;

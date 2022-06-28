@@ -37,7 +37,7 @@ class ProductApiIntegrationTest {
 		).andReturn().getResponse();
 
 		// then
-		Assertions.assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
+		Assertions.assertThat(response.getStatus()).isEqualTo(HttpStatus.CREATED.value());
 		CreateProductResponse createProductResponse = objectMapper.readValue(response.getContentAsString(),
 			CreateProductResponse.class);
 		Assertions.assertThat(createProductResponse.getId()).isPositive();
