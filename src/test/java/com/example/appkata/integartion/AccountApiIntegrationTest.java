@@ -106,7 +106,8 @@ class AccountApiIntegrationTest {
 		// given
 
 		// when
-		MockHttpServletResponse response = mockMvc.perform(get("/accounts"))
+		MockHttpServletResponse response = mockMvc.perform(get("/accounts")
+				.session(SessionFixture.getLoginSession(mockMvc, objectMapper)))
 			.andReturn().getResponse();
 
 		// then

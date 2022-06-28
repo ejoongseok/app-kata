@@ -38,6 +38,6 @@ public class AccountService {
 	}
 
 	public Account getUser() {
-		return null;
+		return loginService.getUser();
 	}
 }
