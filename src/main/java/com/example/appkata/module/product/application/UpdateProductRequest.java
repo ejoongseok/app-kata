@@ -1,18 +1,23 @@
 package com.example.appkata.module.product.application;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
+@NoArgsConstructor(access = lombok.AccessLevel.PROTECTED)
 public class UpdateProductRequest {
-	private final String productName;
-	private final int price;
 
-	public UpdateProductRequest(String productName, int price) {
+	private Long id;
+	private String productName;
+	private int price;
+
+	public UpdateProductRequest(Long productId, String productName, int price) {
+		this.id = productId;
 		this.productName = productName;
 		this.price = price;
 	}
 
-	public static UpdateProductRequest of(String newProductName, int newPrice) {
-		return new UpdateProductRequest(newProductName, newPrice);
+	public static UpdateProductRequest of(Long productId, String newProductName, int newPrice) {
+		return new UpdateProductRequest(productId, newProductName, newPrice);
 	}
 }
