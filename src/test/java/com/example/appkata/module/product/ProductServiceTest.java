@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.example.appkata.module.product.application.CreateProductRequest;
 import com.example.appkata.module.product.application.ProductService;
+import com.example.appkata.module.product.application.UpdateProductRequest;
 import com.example.appkata.module.product.domain.Product;
 
 @SpringBootTest
@@ -30,5 +31,25 @@ class ProductServiceTest {
 		Assertions.assertThat(product.getName()).isEqualTo(productName);
 		Assertions.assertThat(product.getPrice()).isEqualTo(price);
 	}
+
+	@Test
+	@DisplayName("상품 수정")
+	void update_product_test() {
+		// given
+		String productName = "노트북";
+		int price = 1_000_000;
+		CreateProductRequest request = CreateProductRequest.of(productName, price);
+		Product product = productService.createProduct(request);
+
+		String newProductName = "노트북2";
+		int newPrice = 1_000_001;
+		UpdateProductRequest updateRequest = UpdateProductRequest.of(product.getId(), newProductName, newPrice);
+		// when
+		productService.updateProduct(updateRequest);
+		// then
+		Assertions.assertThat(product.getName()).isEqualTo(newProductName);
+		Assertions.assertThat(product.getPrice()).isEqualTo(newPrice);
+	}
+
 
 }
