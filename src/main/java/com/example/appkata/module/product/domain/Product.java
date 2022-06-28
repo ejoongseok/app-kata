@@ -16,4 +16,9 @@ public class Product {
 	public void assignId(long nextId) {
 		this.id = nextId;
 	}
+
+	public void update(String productName, int price) {
+		this.name = productName;
+		this.price = price;
+	}
 }
