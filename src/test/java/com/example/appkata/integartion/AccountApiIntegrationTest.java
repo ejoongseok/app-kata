@@ -25,6 +25,7 @@ import com.example.appkata.account.application.CreateAccountResponse;
 import com.example.appkata.account.application.UpdateAccountRequest;
 import com.example.appkata.account.application.UpdateAccountResponse;
 import com.example.appkata.account.infra.EmailSender;
+import com.example.appkata.fixture.AccountFixture;
 import com.example.appkata.fixture.SessionFixture;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -97,6 +98,18 @@ class AccountApiIntegrationTest {
 		).andReturn().getResponse();
 		// then
 		Assertions.assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
+	}
+
+	@Test
+	void 회원_조회_요청() throws Exception {
+		// given
+
+		// when
+
+		// then
+		Assertions.assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
+		Assertions.assertThat(findAccountResponse.getUsername()).isEqaulTo(AccountFixture.FIXTURE_USER_NAME);
+		Assertions.assertThat(findAccountResponse.getEmail()).isEqaulTo(AccountFixture.FIXTURE_USER_EMAIL);
 	}
 
 
