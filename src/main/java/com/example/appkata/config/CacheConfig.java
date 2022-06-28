@@ -1,9 +1,10 @@
 package com.example.appkata.config;
 
+import static com.example.appkata.config.CacheConfig.AppCacheTypeConstant.*;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
 
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
@@ -37,10 +38,15 @@ public class CacheConfig {
 		return cacheManager;
 	}
 
+
+	public static final class AppCacheTypeConstant {
+		public static final String FIND_USER_CACHE = "findUser";
+	}
+
 	@Getter
 	public enum AppCacheType {
 		FIND_USER(
-				"findUser",
+				FIND_USER_CACHE,
 				60 * 60 * 24, // 하루
 				100
 			);
