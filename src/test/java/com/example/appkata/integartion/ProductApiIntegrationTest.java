@@ -77,4 +77,13 @@ class ProductApiIntegrationTest {
 		Assertions.assertThat(updateProductResponse.getPrice()).isEqualTo(newPrice);
 	}
 
+	@Test
+	void 상품_조회_요청() {
+		// given
+
+		// when
+
+		// then
+	}
+
 }
