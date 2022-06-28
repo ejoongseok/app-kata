@@ -45,4 +45,14 @@ class ProductApiIntegrationTest {
 		Assertions.assertThat(createProductResponse.getPrice()).isEqualTo(price);
 	}
 
+	@Test
+	void 상품_수정_요청() {
+		// given
+
+		// when
+
+		// then
+	}
+
+
 }
