@@ -40,13 +40,13 @@ public class CacheConfig {
 
 
 	public static final class AppCacheTypeConstant {
-		public static final String FIND_USER_CACHE = "findUser";
+		public static final String FIND_PRODUCT_CACHE = "findProduct";
 	}
 
 	@Getter
 	public enum AppCacheType {
-		FIND_USER(
-				FIND_USER_CACHE,
+		FIND_PRODUCT(
+			FIND_PRODUCT_CACHE,
 				60 * 60 * 24, // 하루
 				100
 			);

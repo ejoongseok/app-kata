@@ -1,5 +1,6 @@
 package com.example.appkata.integartion;
 
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
 import org.assertj.core.api.Assertions;
@@ -7,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
@@ -16,6 +18,7 @@ import com.example.appkata.fixture.ProductFixture;
 import com.example.appkata.module.product.application.CreateProductRequest;
 import com.example.appkata.module.product.application.CreateProductResponse;
 import com.example.appkata.module.product.application.FindProductResponse;
+import com.example.appkata.module.product.application.ProductService;
 import com.example.appkata.module.product.application.UpdateProductRequest;
 import com.example.appkata.module.product.application.UpdateProductResponse;
 import com.example.appkata.module.product.domain.Product;
@@ -29,6 +32,8 @@ class ProductApiIntegrationTest {
 	@Autowired MockMvc mockMvc;
 
 	@Autowired ProductFixture productFixture;
+
+	@SpyBean ProductService productService;
 
 	@Test
 	void 상품_등록_요청() throws Exception {
@@ -93,6 +98,20 @@ class ProductApiIntegrationTest {
 		Assertions.assertThat(findProductResponse.getId()).isEqualTo(product.getId());
 		Assertions.assertThat(findProductResponse.getProductName()).isEqualTo(product.getName());
 		Assertions.assertThat(findProductResponse.getPrice()).isEqualTo(product.getPrice());
+	}
+
+	@Test
+	void 상품_조회_요청_캐시_적용() throws Exception {
+		// given
+		Product product = productFixture.createProduct("노트북", 1_000_000);
+
+		// when
+		for (int i = 0; i < 10; i++) {
+			mockMvc.perform(get("/products/{id}", product.getId())).andReturn();
+		}
+
+		// then
+		verify(productService, times(1)).findProduct(product.getId());
 	}
 
 }

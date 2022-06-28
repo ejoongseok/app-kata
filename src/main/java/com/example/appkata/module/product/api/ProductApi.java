@@ -1,5 +1,9 @@
 package com.example.appkata.module.product.api;
 
+import static com.example.appkata.common.config.CacheConfig.AppCacheTypeConstant.*;
+
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,6 +40,7 @@ public class ProductApi {
 
 	@PutMapping("/{id}")
 	@ResponseStatus(HttpStatus.OK)
+	@CachePut(value = FIND_PRODUCT_CACHE, key = "#request?.id")
 	public UpdateProductResponse updateProduct(@RequestBody UpdateProductRequest request) {
 		Product updateProduct = productService.updateProduct(request);
 		return new UpdateProductResponse(updateProduct);
@@ -43,6 +48,7 @@ public class ProductApi {
 
 	@GetMapping("/{id}")
 	@ResponseStatus(HttpStatus.OK)
+	@Cacheable(value = FIND_PRODUCT_CACHE, key = "#id")
 	public FindProductResponse getProduct(@PathVariable("id") Long id) {
 		Product product = productService.findProduct(id);
 		return new FindProductResponse(product);
