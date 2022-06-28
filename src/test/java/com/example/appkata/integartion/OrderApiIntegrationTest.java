@@ -10,6 +10,8 @@ import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.example.appkata.fixture.ProductFixture;
+import com.example.appkata.module.order.application.CreateOrderRequest;
+import com.example.appkata.module.order.application.CreateOrderResponse;
 import com.example.appkata.module.product.domain.Product;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -45,45 +47,4 @@ class OrderApiIntegrationTest {
 		Assertions.assertThat(createOrderResponse.getProductName()).isEqualTo(product.getName());
 	}
 
-	private static class CreateOrderRequest {
-		private long productId;
-		private int quantity;
-
-		public CreateOrderRequest(Long productId, int quantity) {
-			this.productId = productId;
-			this.quantity = quantity;
-		}
-
-		public static CreateOrderRequest of(Long productId, int quantity) {
-			return new CreateOrderRequest(productId, quantity);
-		}
-	}
-
-	private static class CreateOrderResponse {
-		private long orderId;
-		private long productId;
-		private int quantity;
-		private int totalPrice;
-		private String productName;
-
-		public long getOrderId() {
-			return orderId;
-		}
-
-		public long getProductId() {
-			return productId;
-		}
-
-		public int getQuantity() {
-			return quantity;
-		}
-
-		public int getTotalPrice() {
-			return totalPrice;
-		}
-
-		public String getProductName() {
-			return productName;
-		}
-	}
 }
