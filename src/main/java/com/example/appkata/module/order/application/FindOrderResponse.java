@@ -1,5 +1,8 @@
 package com.example.appkata.module.order.application;
 
+import lombok.Getter;
+
+@Getter
 public class FindOrderResponse {
 	private Long id;
 	private Long productId;
@@ -7,23 +10,4 @@ public class FindOrderResponse {
 	private int totalPrice;
 	private int quantity;
 
-	public Long getId() {
-		return id;
-	}
-
-	public Long getProductId() {
-		return productId;
-	}
-
-	public String getProductName() {
-		return productName;
-	}
-
-	public int getTotalPrice() {
-		return totalPrice;
-	}
-
-	public int getQuantity() {
-		return quantity;
-	}
 }
