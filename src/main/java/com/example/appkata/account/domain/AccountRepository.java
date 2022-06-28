@@ -8,4 +8,6 @@ public interface AccountRepository {
 	Optional<Account> findByEmail(String email);
 
 	void deleteAll();
+
+	Optional<Account> findById(Long loginUserId);
 }
