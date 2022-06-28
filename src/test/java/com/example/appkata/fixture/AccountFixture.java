@@ -2,9 +2,9 @@ package com.example.appkata.fixture;
 
 import org.springframework.stereotype.Component;
 
-import com.example.appkata.account.application.AccountService;
-import com.example.appkata.account.application.CreateAccountRequest;
-import com.example.appkata.account.domain.Account;
+import com.example.appkata.module.account.application.AccountService;
+import com.example.appkata.module.account.application.CreateAccountRequest;
+import com.example.appkata.module.account.domain.Account;
 
 @Component
 public class AccountFixture {

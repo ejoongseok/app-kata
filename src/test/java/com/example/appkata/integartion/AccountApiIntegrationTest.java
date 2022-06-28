@@ -21,13 +21,13 @@ import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.web.servlet.MockMvc;
 
-import com.example.appkata.account.application.CreateAccountRequest;
-import com.example.appkata.account.application.CreateAccountResponse;
-import com.example.appkata.account.application.FindAccountResponse;
-import com.example.appkata.account.application.UpdateAccountRequest;
-import com.example.appkata.account.application.UpdateAccountResponse;
-import com.example.appkata.account.domain.AccountRepository;
-import com.example.appkata.account.infra.EmailSender;
+import com.example.appkata.module.account.application.CreateAccountRequest;
+import com.example.appkata.module.account.application.CreateAccountResponse;
+import com.example.appkata.module.account.application.FindAccountResponse;
+import com.example.appkata.module.account.application.UpdateAccountRequest;
+import com.example.appkata.module.account.application.UpdateAccountResponse;
+import com.example.appkata.module.account.domain.AccountRepository;
+import com.example.appkata.module.account.infra.EmailSender;
 import com.example.appkata.fixture.AccountFixture;
 import com.example.appkata.fixture.SessionFixture;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -54,8 +54,8 @@ class AccountApiIntegrationTest {
 	@Test
 	void 회원_등록_요청(CapturedOutput capturedOutput) throws Exception {
 		// given
-		String username = "joongseok";
-		String email = "ejoongseok@gamil.com";
+		String username = AccountFixture.FIXTURE_USER_NAME;
+		String email = AccountFixture.FIXTURE_USER_EMAIL;
 		CreateAccountRequest request = new CreateAccountRequest(username, email);
 
 		// when

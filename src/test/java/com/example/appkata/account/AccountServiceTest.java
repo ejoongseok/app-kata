@@ -6,10 +6,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.example.appkata.account.application.AccountService;
-import com.example.appkata.account.application.CreateAccountRequest;
-import com.example.appkata.account.application.UpdateAccountRequest;
-import com.example.appkata.account.domain.Account;
+import com.example.appkata.module.account.application.AccountService;
+import com.example.appkata.module.account.application.CreateAccountRequest;
+import com.example.appkata.module.account.application.UpdateAccountRequest;
+import com.example.appkata.module.account.domain.Account;
 import com.example.appkata.fixture.SessionFixture;
 
 @SpringBootTest

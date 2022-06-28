@@ -1,7 +1,7 @@
 package com.example.appkata.fixture;
 
 import static com.example.appkata.fixture.AccountFixture.*;
-import static com.example.appkata.login.application.AccountSessionManager.*;
+import static com.example.appkata.module.login.application.AccountSessionManager.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.*;
 
@@ -13,11 +13,10 @@ import org.springframework.stereotype.Component;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
-import com.example.appkata.account.application.CreateAccountRequest;
-import com.example.appkata.account.domain.Account;
-import com.example.appkata.login.application.LoginRequest;
-import com.example.appkata.login.application.LoginService;
-import com.fasterxml.jackson.core.JsonProcessingException;
+import com.example.appkata.module.account.application.CreateAccountRequest;
+import com.example.appkata.module.account.domain.Account;
+import com.example.appkata.module.login.application.LoginRequest;
+import com.example.appkata.module.login.application.LoginService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Component

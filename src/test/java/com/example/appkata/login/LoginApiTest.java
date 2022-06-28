@@ -1,7 +1,7 @@
 package com.example.appkata.login;
 
 import static com.example.appkata.fixture.AccountFixture.*;
-import static com.example.appkata.login.application.AccountSessionManager.*;
+import static com.example.appkata.module.login.application.AccountSessionManager.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
 import javax.servlet.http.HttpSession;
@@ -18,8 +18,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
 import com.example.appkata.fixture.AccountFixture;
-import com.example.appkata.login.application.LoginRequest;
-import com.example.appkata.login.application.LoginResponse;
+import com.example.appkata.module.login.application.LoginRequest;
+import com.example.appkata.module.login.application.LoginResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @SpringBootTest
