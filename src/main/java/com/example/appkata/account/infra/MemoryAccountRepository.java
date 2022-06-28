@@ -39,6 +39,12 @@ public class MemoryAccountRepository implements AccountRepository {
 		return Optional.ofNullable(persistentMap.get(loginUserId));
 	}
 
+	@Override
+	public boolean delete(Account user) {
+		Account remove = persistentMap.remove(user.getId());
+		return remove != null;
+	}
+
 	private Long nextId() {
 		return id.getAndIncrement();
 	}

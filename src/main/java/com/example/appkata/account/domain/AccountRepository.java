@@ -10,4 +10,6 @@ public interface AccountRepository {
 	void deleteAll();
 
 	Optional<Account> findById(Long loginUserId);
+
+	boolean delete(Account user);
 }
