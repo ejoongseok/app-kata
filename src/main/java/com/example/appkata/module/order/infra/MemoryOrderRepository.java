@@ -1,6 +1,7 @@
 package com.example.appkata.module.order.infra;
 
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -19,6 +20,11 @@ public class MemoryOrderRepository implements OrderRepository {
 	public void save(Order order) {
 		order.assignId(nextId());
 		persistMap.put(order.getId(), order);
+	}
+
+	@Override
+	public Optional<Order> findById(long orderId) {
+		return Optional.ofNullable(persistMap.get(orderId));
 	}
 
 	private long nextId() {

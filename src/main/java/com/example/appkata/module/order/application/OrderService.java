@@ -22,4 +22,10 @@ public class OrderService {
 		orderRepository.save(order);
 		return order;
 	}
+
+	public Order findOrder(long orderId) {
+		Order order = orderRepository.findById(orderId)
+			.orElseThrow(() -> new IllegalArgumentException("Order not found"));
+		return order;
+	}
 }
