@@ -3,15 +3,18 @@ package com.example.appkata.module.product;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import com.example.appkata.module.product.application.CreateProductRequest;
 import com.example.appkata.module.product.application.ProductService;
 import com.example.appkata.module.product.domain.Product;
-import com.example.appkata.module.product.infra.MemoryProductRepository;
 
+@SpringBootTest
 class ProductServiceTest {
 
-	private ProductService productService = new ProductService(new MemoryProductRepository());
+	@Autowired
+	ProductService productService;
 
 	@Test
 	@DisplayName("상품 등록")
