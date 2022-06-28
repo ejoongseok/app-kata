@@ -5,10 +5,12 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import com.example.appkata.module.product.application.CreateProductRequest;
+import com.example.appkata.module.product.application.ProductService;
+import com.example.appkata.module.product.domain.Product;
 
 class ProductServiceTest {
 
-	private ProductService productService;
+	private ProductService productService = new ProductService();
 
 	@Test
 	@DisplayName("상품 등록")
@@ -23,30 +25,6 @@ class ProductServiceTest {
 		Assertions.assertThat(product.getId()).isPositive();
 		Assertions.assertThat(product.getName()).isEqualTo(productName);
 		Assertions.assertThat(product.getPrice()).isEqualTo(price);
-
 	}
 
-	private static class Product {
-		private Long id;
-		private String name;
-		private int price;
-
-		public Long getId() {
-			return id;
-		}
-
-		public String getName() {
-			return name;
-		}
-
-		public int getPrice() {
-			return price;
-		}
-	}
-
-	private class ProductService {
-		public Product createProduct(CreateProductRequest request) {
-			return null;
-		}
-	}
 }
