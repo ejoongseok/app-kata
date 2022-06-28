@@ -36,4 +36,8 @@ public class AccountService {
 		Account user = loginService.getUser();
 		return repository.delete(user);
 	}
+
+	public Account getUser() {
+		return null;
+	}
 }

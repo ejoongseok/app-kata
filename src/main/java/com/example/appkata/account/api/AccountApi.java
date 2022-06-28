@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,6 +18,7 @@ import com.example.appkata.account.application.AccountExceptionResponse;
 import com.example.appkata.account.application.AccountService;
 import com.example.appkata.account.application.CreateAccountRequest;
 import com.example.appkata.account.application.CreateAccountResponse;
+import com.example.appkata.account.application.FindAccountResponse;
 import com.example.appkata.account.application.UpdateAccountRequest;
 import com.example.appkata.account.application.UpdateAccountResponse;
 import com.example.appkata.account.domain.Account;
@@ -48,6 +50,13 @@ public class AccountApi {
 	@ResponseStatus(HttpStatus.OK)
 	public void deleteAccount() {
 		service.removeUser();
+	}
+
+	@GetMapping
+	@ResponseStatus(HttpStatus.OK)
+	public FindAccountResponse getAccount() {
+		Account account = service.getUser();
+		return new FindAccountResponse(account.getUsername(), account.getEmail());
 	}
 
 	@ExceptionHandler(MethodArgumentNotValidException.class)

@@ -1,14 +1,14 @@
 package com.example.appkata.account.application;
 
+import lombok.Getter;
+
+@Getter
 public class FindAccountResponse {
-	private String username;
-	private String email;
+	private final String username;
+	private final String email;
 
-	public String getEmail() {
-		return email;
-	}
-
-	public String getUsername() {
-		return username;
+	public FindAccountResponse(String username, String email) {
+		this.username = username;
+		this.email = email;
 	}
 }
