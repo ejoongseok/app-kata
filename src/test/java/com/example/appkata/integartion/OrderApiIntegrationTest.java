@@ -80,4 +80,14 @@ class OrderApiIntegrationTest {
 		Assertions.assertThat(findOrderResponse.getQuantity()).isEqualTo(order.getQuantity());
 	}
 
+	@Test
+	void 주문_취소() {
+		// given
+
+		// when
+
+		// then
+	}
+
+
 }
