@@ -4,6 +4,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
@@ -15,12 +18,14 @@ import com.example.appkata.module.order.application.CreateOrderResponse;
 import com.example.appkata.module.product.domain.Product;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+@SpringBootTest
+@AutoConfigureMockMvc
 class OrderApiIntegrationTest {
 
-	MockMvc mockMvc;
-	ObjectMapper objectMapper;
+	@Autowired MockMvc mockMvc;
+	@Autowired ObjectMapper objectMapper;
 
-	ProductFixture productFixture;
+	@Autowired ProductFixture productFixture;
 
 	@Test
 	void 주문_요청() throws Exception {
