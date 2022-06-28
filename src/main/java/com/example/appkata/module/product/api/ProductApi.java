@@ -31,9 +31,10 @@ public class ProductApi {
 		return new CreateProductResponse(product);
 	}
 
-	@PutMapping
+	@PutMapping("/{id}")
 	@ResponseStatus(HttpStatus.OK)
 	public UpdateProductResponse updateProduct(@RequestBody UpdateProductRequest request) {
-		return null;
+		Product updateProduct = productService.updateProduct(request);
+		return new UpdateProductResponse(updateProduct);
 	}
 }

@@ -17,4 +17,8 @@ public class ProductService {
 		productRepository.save(product);
 		return product;
 	}
+
+	public Product updateProduct(UpdateProductRequest request) {
+		return null;
+	}
 }
