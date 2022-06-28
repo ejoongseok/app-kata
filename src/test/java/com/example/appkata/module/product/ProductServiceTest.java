@@ -59,14 +59,18 @@ class ProductServiceTest {
 	@DisplayName("상품 조회")
 	void get_product_test() {
 		// given
+		String productName = "노트북";
+		int price = 1_000_000;
+		CreateProductRequest request = CreateProductRequest.of(productName, price);
+		Product product = productService.createProduct(request);
 
 		// when
-		;
+		Product findProduct = productService.findProduct(product.getId());
 
 		// then
-		Assertions.assertThat(product.getId()).isEqualTo(productId);
-		Assertions.assertThat(product.getName()).isEqualTo(productName);
-		Assertions.assertThat(product.getPrice()).isEqualTo(price);
+		Assertions.assertThat(findProduct.getId()).isEqualTo(product.getId());
+		Assertions.assertThat(findProduct.getName()).isEqualTo(productName);
+		Assertions.assertThat(findProduct.getPrice()).isEqualTo(price);
 	}
 
 
