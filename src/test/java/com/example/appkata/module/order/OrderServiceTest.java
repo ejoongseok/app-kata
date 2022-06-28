@@ -40,4 +40,19 @@ class OrderServiceTest {
 
 	}
 
+	@Test
+	void 주문_조회() {
+		// given
+
+		// when
+
+		// then
+		Assertions.assertThat(order.getId()).isEqualTo(orderId);
+		Assertions.assertThat(order.getTotalPrice()).isEqualTo(totalPrice);
+		Assertions.assertThat(order.getQuantity()).isEqualTo(quantity);
+		Assertions.assertThat(product.getId()).isEqualTo(productId);
+		Assertions.assertThat(product.getName()).isEqualTo(productName);
+	}
+
+
 }
