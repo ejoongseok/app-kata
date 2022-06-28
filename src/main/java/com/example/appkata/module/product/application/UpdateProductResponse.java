@@ -3,8 +3,10 @@ package com.example.appkata.module.product.application;
 import com.example.appkata.module.product.domain.Product;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
+@NoArgsConstructor(access = lombok.AccessLevel.PROTECTED)
 public class UpdateProductResponse {
 	private Long id;
 	private String productName;
