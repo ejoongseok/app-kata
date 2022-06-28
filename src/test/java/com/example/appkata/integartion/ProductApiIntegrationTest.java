@@ -12,6 +12,8 @@ import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.web.servlet.MockMvc;
 
+import com.example.appkata.module.product.application.CreateProductRequest;
+import com.example.appkata.module.product.application.CreateProductResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @SpringBootTest
@@ -43,35 +45,4 @@ class ProductApiIntegrationTest {
 		Assertions.assertThat(createProductResponse.getPrice()).isEqualTo(price);
 	}
 
-	private static class CreateProductResponse {
-		private long id;
-		private String productName;
-		private int price;
-
-		public long getId() {
-			return id;
-		}
-
-		public String getProductName() {
-			return productName;
-		}
-
-		public int getPrice() {
-			return price;
-		}
-	}
-
-	private static class CreateProductRequest {
-		private String productName;
-		private int price;
-
-		public CreateProductRequest(String productName, int price) {
-			this.productName = productName;
-			this.price = price;
-		}
-
-		public static CreateProductRequest of(String productName, int price) {
-			return new CreateProductRequest(productName, price);
-		}
-	}
 }
