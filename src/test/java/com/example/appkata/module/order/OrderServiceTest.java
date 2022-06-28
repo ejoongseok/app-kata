@@ -43,15 +43,25 @@ class OrderServiceTest {
 	@Test
 	void 주문_조회() {
 		// given
+		String productName = "상품1";
+		int quantity = 10;
+		int price = 1000;
+		Product product = productFixture.createProduct(productName, price);
+		long productId = product.getId();
+		Order order = orderService.order(CreateOrderRequest.of(productId, quantity));
+		long orderId = order.getId();
+		Product orderProduct = order.getProduct();
+		int totalPrice = order.getTotalPrice();
 
 		// when
+		Order findOrder = orderService.findOrder(orderId);
 
 		// then
-		Assertions.assertThat(order.getId()).isEqualTo(orderId);
-		Assertions.assertThat(order.getTotalPrice()).isEqualTo(totalPrice);
-		Assertions.assertThat(order.getQuantity()).isEqualTo(quantity);
-		Assertions.assertThat(product.getId()).isEqualTo(productId);
-		Assertions.assertThat(product.getName()).isEqualTo(productName);
+		Assertions.assertThat(findOrder.getId()).isEqualTo(orderId);
+		Assertions.assertThat(findOrder.getTotalPrice()).isEqualTo(totalPrice);
+		Assertions.assertThat(findOrder.getQuantity()).isEqualTo(quantity);
+		Assertions.assertThat(orderProduct.getId()).isEqualTo(productId);
+		Assertions.assertThat(orderProduct.getName()).isEqualTo(productName);
 	}
 
 
