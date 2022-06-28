@@ -1,4 +1,4 @@
-package dependency;
+package com.example.appkata.common.dependency;
 
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.*;
 import static com.tngtech.archunit.library.Architectures.*;

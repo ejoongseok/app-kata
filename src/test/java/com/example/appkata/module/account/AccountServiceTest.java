@@ -1,4 +1,4 @@
-package com.example.appkata.account;
+package com.example.appkata.module.account;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;

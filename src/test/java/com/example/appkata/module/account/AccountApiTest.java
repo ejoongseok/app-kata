@@ -1,4 +1,4 @@
-package com.example.appkata.account;
+package com.example.appkata.module.account;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 

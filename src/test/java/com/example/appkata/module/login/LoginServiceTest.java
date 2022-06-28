@@ -1,4 +1,4 @@
-package com.example.appkata.login;
+package com.example.appkata.module.login;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

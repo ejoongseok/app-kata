@@ -1,4 +1,4 @@
-package com.example.appkata.login;
+package com.example.appkata.module.login;
 
 import static com.example.appkata.fixture.AccountFixture.*;
 import static com.example.appkata.module.account.application.AccountSessionManager.*;
