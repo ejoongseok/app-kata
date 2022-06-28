@@ -33,7 +33,8 @@ public class OrderApi {
 
 	@GetMapping("/{orderId}")
 	public FindOrderResponse findOrder(@PathVariable("orderId") long orderId) {
-		return null;
+		Order order = orderService.findOrder(orderId);
+		return new FindOrderResponse(order);
 	}
 
 }
