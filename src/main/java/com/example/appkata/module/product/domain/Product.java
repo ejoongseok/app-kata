@@ -12,4 +12,8 @@ public class Product {
 		this.name = productName;
 		this.price = price;
 	}
+
+	public void assignId(long nextId) {
+		this.id = nextId;
+	}
 }
