@@ -31,4 +31,9 @@ public class AccountService {
 		user.updateUsername(request.getUsername());
 		return new Account(user.getUsername(), user.getEmail());
 	}
+
+	public boolean removeUser() {
+		Account user = loginService.getUser();
+		return repository.delete(user);
+	}
 }
