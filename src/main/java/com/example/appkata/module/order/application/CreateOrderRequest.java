@@ -1,8 +1,10 @@
 package com.example.appkata.module.order.application;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
+@NoArgsConstructor(access = lombok.AccessLevel.PROTECTED)
 public class CreateOrderRequest {
 	private long productId;
 	private int quantity;
