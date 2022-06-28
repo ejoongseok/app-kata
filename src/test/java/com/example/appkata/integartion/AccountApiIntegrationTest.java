@@ -6,6 +6,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import javax.transaction.Transactional;
 
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,7 @@ import com.example.appkata.account.application.CreateAccountResponse;
 import com.example.appkata.account.application.FindAccountResponse;
 import com.example.appkata.account.application.UpdateAccountRequest;
 import com.example.appkata.account.application.UpdateAccountResponse;
+import com.example.appkata.account.domain.AccountRepository;
 import com.example.appkata.account.infra.EmailSender;
 import com.example.appkata.fixture.AccountFixture;
 import com.example.appkata.fixture.SessionFixture;
@@ -39,6 +41,15 @@ class AccountApiIntegrationTest {
 	@Autowired MockMvc mockMvc;
 	@SpyBean
 	EmailSender emailSender;
+
+	@SpyBean
+	AccountRepository accountRepository;
+
+	@BeforeEach
+	void setUp() {
+	    accountRepository.deleteAll();
+	}
+
 
 	@Test
 	void 회원_등록_요청(CapturedOutput capturedOutput) throws Exception {
