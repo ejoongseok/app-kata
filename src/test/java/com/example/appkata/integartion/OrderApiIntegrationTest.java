@@ -59,6 +59,12 @@ class OrderApiIntegrationTest {
 		// when
 
 		// then
+		Assertions.assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
+		Assertions.assertThat(findOrderResponse.getId()).isEqualTo(orderId);
+		Assertions.assertThat(findOrderResponse.getProductId()).isEqualTo(productId);
+		Assertions.assertThat(findOrderResponse.getProductName()).isEqualTo(productName);
+		Assertions.assertThat(findOrderResponse.getTotalPrice()).isEqualTo(totalPrice);
+		Assertions.assertThat(findOrderResponse.getQuantity()).isEqualTo(quantity);
 	}
 
 
