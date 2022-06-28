@@ -3,6 +3,9 @@ package com.example.appkata.integartion;
 import static org.mockito.BDDMockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
+import java.awt.image.PixelGrabber;
+
+import javax.sql.RowSet;
 import javax.transaction.Transactional;
 
 import org.assertj.core.api.Assertions;
@@ -105,12 +108,27 @@ class AccountApiIntegrationTest {
 		// given
 
 		// when
+		MockHttpServletResponse response = mockMvc.perform(get("/accounts"))
+			.andReturn().getResponse();
 
 		// then
 		Assertions.assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
-		Assertions.assertThat(findAccountResponse.getUsername()).isEqaulTo(AccountFixture.FIXTURE_USER_NAME);
-		Assertions.assertThat(findAccountResponse.getEmail()).isEqaulTo(AccountFixture.FIXTURE_USER_EMAIL);
+		FindAccountResponse findAccountResponse = objectMapper.readValue(response.getContentAsString(),
+			FindAccountResponse.class);
+		Assertions.assertThat(findAccountResponse.getUsername()).isEqualTo(AccountFixture.FIXTURE_USER_NAME);
+		Assertions.assertThat(findAccountResponse.getEmail()).isEqualTo(AccountFixture.FIXTURE_USER_EMAIL);
 	}
 
+	private static class FindAccountResponse {
+		private String username;
+		private String email;
 
+		public String getEmail() {
+			return email;
+		}
+
+		public String getUsername() {
+			return username;
+		}
+	}
 }
