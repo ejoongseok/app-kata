@@ -2,8 +2,6 @@ package com.example.appkata.integartion;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
-import java.awt.image.PixelGrabber;
-
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +15,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import com.example.appkata.fixture.ProductFixture;
 import com.example.appkata.module.product.application.CreateProductRequest;
 import com.example.appkata.module.product.application.CreateProductResponse;
+import com.example.appkata.module.product.application.FindProductResponse;
 import com.example.appkata.module.product.application.UpdateProductRequest;
 import com.example.appkata.module.product.application.UpdateProductResponse;
 import com.example.appkata.module.product.domain.Product;
@@ -96,21 +95,4 @@ class ProductApiIntegrationTest {
 		Assertions.assertThat(findProductResponse.getPrice()).isEqualTo(product.getPrice());
 	}
 
-	private static class FindProductResponse {
-		private long id;
-		private String productName;
-		private int price;
-
-		public long getId() {
-			return id;
-		}
-
-		public String getProductName() {
-			return productName;
-		}
-
-		public int getPrice() {
-			return price;
-		}
-	}
 }
