@@ -1,5 +1,7 @@
 package com.example.appkata.module.product.application;
 
+import com.example.appkata.module.product.domain.Product;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -13,5 +15,11 @@ public class CreateProductResponse {
 	public CreateProductResponse(String productName, int price) {
 		this.productName = productName;
 		this.price = price;
+	}
+
+	public CreateProductResponse(Product product) {
+		this.id = product.getId();
+		this.productName = product.getName();
+		this.price = product.getPrice();
 	}
 }

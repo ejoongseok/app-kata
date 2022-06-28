@@ -9,14 +9,22 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.appkata.module.product.application.CreateProductRequest;
 import com.example.appkata.module.product.application.CreateProductResponse;
+import com.example.appkata.module.product.application.ProductService;
+import com.example.appkata.module.product.domain.Product;
+
+import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/products")
+@RequiredArgsConstructor
 public class ProductApi {
+
+	private final ProductService productService;
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public CreateProductResponse create(@RequestBody CreateProductRequest request) {
-		return new CreateProductResponse("productName", 100);
+		Product product = productService.createProduct(request);
+		return new CreateProductResponse(product);
 	}
 }
